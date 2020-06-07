@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
-public class Crud_Aluno extends JFrame {
+public class CrudAluno extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -29,7 +29,7 @@ public class Crud_Aluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Crud_Aluno frame = new Crud_Aluno();
+					CrudAluno frame = new CrudAluno();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class Crud_Aluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Crud_Aluno() {
+	public CrudAluno() {
 		setTitle("CRUD - ALUNO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 598, 445);
