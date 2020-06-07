@@ -5,13 +5,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.controller.AlunoController;
+import com.poo.model.Aluno;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
@@ -20,7 +27,6 @@ public class CrudAluno extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -42,6 +48,11 @@ public class CrudAluno extends JFrame {
 	 * Create the frame.
 	 */
 	public CrudAluno() {
+		// instanciando os componetentes globalmente 
+		Aluno aluno = new Aluno();
+		
+		AlunoController controller = new AlunoController();
+		
 		setTitle("CRUD - ALUNO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 598, 445);
@@ -83,8 +94,24 @@ public class CrudAluno extends JFrame {
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("INSERT");
+		btnNewButton.setBackground(new Color(50, 205, 50));
+		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {				
+					
+					aluno.setNome(textField.getText());
+					aluno.setMatriula(textField_1.getText());
+					
+					controller.create(aluno);
+					JOptionPane.showMessageDialog(panel, "Aluno inserido com sucesso!");
+				}
+				
+				 catch (Exception e1) {
+					
+					JOptionPane.showMessageDialog(null, "Erro ao Inserir Aluno!");
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
@@ -97,11 +124,46 @@ public class CrudAluno extends JFrame {
 		panel.add(lblNewLabel_3);
 		
 		JButton btnUpdate = new JButton("UPDATE");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {								
+					
+					aluno.setNome(textField.getText());
+					aluno.setMatriula(textField_1.getText());
+					
+					controller.updateAluno(aluno);
+					
+					JOptionPane.showMessageDialog(null, "Aluno atualizado!");
+				}
+				catch(Exception e1) {
+					
+					System.out.println("Erro ao atualizar aluno");
+				}
+			}
+		});
 		btnUpdate.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnUpdate.setBounds(150, 140, 109, 35);
 		panel.add(btnUpdate);
 		
 		JButton btnDelete = new JButton("DELETE");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					aluno.setMatriula(textField_1.getText());					
+					controller.delete(aluno);					
+				}
+				
+				catch(Exception e1) {
+					
+					JOptionPane.showMessageDialog(null, "Aluno Deletado com sucesso!");
+				}
+			}
+		});
+		btnDelete.setBackground(new Color(255, 0, 0));
+		btnDelete.setForeground(new Color(192, 192, 192));
 		btnDelete.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnDelete.setBounds(294, 140, 109, 35);
 		panel.add(btnDelete);
@@ -109,14 +171,15 @@ public class CrudAluno extends JFrame {
 		JButton button_2 = new JButton("LIST");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//...		
 			}
 		});
 		button_2.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		button_2.setBounds(443, 140, 109, 35);
 		panel.add(button_2);
 		
-		table = new JTable();
-		table.setBounds(10, 186, 542, 198);
-		panel.add(table);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 187, 546, 191);
+		panel.add(panel_1);
 	}
 }
