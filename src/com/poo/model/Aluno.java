@@ -12,11 +12,11 @@ public class Aluno {
 	private String nome;
 //	private String endereco;
 	
-	public String getMatriula() {
+	public String getMatricula() {
 		return matriula;
 	}
-	public void setMatriula(String matriula) {
-		this.matriula = matriula;
+	public void setMatricula(String matricula) {
+		this.matriula = matricula;
 	}
 	public String getNome() {
 		return nome;
@@ -29,7 +29,7 @@ public class Aluno {
 //	}
 //	public void setEndereco(String endereco) {
 //		this.endereco = endereco;
-//	}
+//	}	
 	
 	
 	

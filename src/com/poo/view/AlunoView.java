@@ -23,7 +23,7 @@ public class AlunoView {
 			AlunoController controller = new AlunoController();
 			
 			System.out.println("Entre com a matricula:\n");
-			aluno.setMatriula(sc.nextLine());
+			aluno.setMatricula(sc.nextLine());
 			
 			System.out.println("Entre com o nome:\n");
 			aluno.setNome(sc.nextLine());
@@ -45,7 +45,7 @@ public class AlunoView {
 		System.out.println("***********************************");
 		
 		for(Aluno aluno:controller.readAll()) {
-			System.out.println("Matricula: " + aluno.getMatriula());
+			System.out.println("Matricula: " + aluno.getMatricula());
 			System.out.println("Nome: " + aluno.getNome());
 			System.out.println("-------------------------------");
 		}
@@ -60,7 +60,7 @@ public class AlunoView {
 			
 			
 			System.out.println("Entre com a mattricula do aluno que deseja alterar: ");
-			aluno.setMatriula(sc.nextLine());
+			aluno.setMatricula(sc.nextLine());
 			
 			System.out.println("Informe o novo aluno: ");
 			aluno.setNome(sc.nextLine());
@@ -83,7 +83,7 @@ public class AlunoView {
 			
 			
 			System.out.println("Entre com a mattricula do aluno que deseja deletar: ");
-			aluno.setMatriula(sc.nextLine());
+			aluno.setMatricula(sc.nextLine());
 			
 			controller.delete(aluno);
 			sc.close();			

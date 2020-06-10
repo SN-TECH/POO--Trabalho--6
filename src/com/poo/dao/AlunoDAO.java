@@ -32,7 +32,7 @@ public class AlunoDAO {
 			
 			statement = connection.prepareStatement(sql); //instancia uma instrução SQL
 			
-			statement.setString(1, aluno.getMatriula());
+			statement.setString(1, aluno.getMatricula());
 			statement.setString(2, aluno.getNome());
 			
 			statement.executeUpdate();
@@ -65,7 +65,7 @@ public class AlunoDAO {
 			while (rs.next()){
 				
 				Aluno aluno = new Aluno();
-				aluno.setMatriula(rs.getString("matricula"));
+				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setNome(rs.getString("nome"));
 				
 				alunos.add(aluno);
@@ -93,7 +93,7 @@ public class AlunoDAO {
 			
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, aluno.getNome());
-			statement.setString(2, aluno.getMatriula());
+			statement.setString(2, aluno.getMatricula());
 			
 			statement.executeUpdate();
 			System.out.println("[AlunoDAO] Aluno alterado com sucesso");
@@ -117,7 +117,7 @@ public void delete(Aluno aluno) {
 		try {
 			
 			statement = connection.prepareStatement(sql);			
-			statement.setString(1, aluno.getMatriula());
+			statement.setString(1, aluno.getMatricula());
 			
 			statement.executeUpdate();
 			System.out.println("[AlunoDAO] Aluno deletado com sucesso");
