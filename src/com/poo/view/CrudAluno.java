@@ -1,185 +1,183 @@
 package com.poo.view;
-
-import java.awt.EventQueue;
-
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
 
 import com.poo.controller.AlunoController;
 import com.poo.model.Aluno;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
-import java.awt.event.ActionEvent;
-import javax.swing.JTable;
-
+import java.awt.Color;
+ 
 public class CrudAluno extends JFrame {
+ 
+    private JPanel painelFundo;
+    private JTable tabela;
+    private JScrollPane barraRolagem;
+    private JLabel labelNome;
+    private JLabel labelMatricula;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private JTextField textNome;
+    private JTextField textMatricula;
+    private JButton btnListarTodos;
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+    public CrudAluno() {
+        super("Registros dos Alunos");
+        criaJTable();
+        criaJanela();
+    }
+ 
+    public void criaJanela() {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrudAluno frame = new CrudAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CrudAluno() {
-		// instanciando os componetentes globalmente 
 		Aluno aluno = new Aluno();
-		
 		AlunoController controller = new AlunoController();
 		
-		setTitle("CRUD - ALUNO");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 598, 445);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setForeground(Color.BLACK);
-		panel.setBounds(10, 11, 562, 384);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel("Nome:");
-		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(10, 31, 46, 14);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("CRUD");
-		lblNewLabel.setBounds(257, 0, 51, 21);
-		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 16));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel);
-		
-		textField = new JTextField();
-		textField.setBounds(10, 56, 326, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Matr\u00EDcula:");
-		lblNewLabel_2.setFont(new Font("Verdana", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(346, 31, 87, 14);
-		panel.add(lblNewLabel_2);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(346, 56, 206, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btnNewButton = new JButton("INSERT");
-		btnNewButton.setBackground(new Color(50, 205, 50));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				try {				
-					
-					aluno.setNome(textField.getText());
-					aluno.setMatriula(textField_1.getText());
-					
+        barraRolagem = new JScrollPane(tabela);
+        barraRolagem.setBounds(154, 111, 497, 198);
+        painelFundo = new JPanel();
+        labelNome = new JLabel("Nome:");
+        labelNome.setBounds(324, 51, 46, 14);
+        labelNome.setFont(new Font("Verdana", Font.BOLD, 12));
+        
+        labelMatricula = new JLabel("Matr\u00EDcula:");
+        labelMatricula.setBounds(6, 50, 122, 16);
+        labelMatricula.setFont(new Font("Verdana", Font.BOLD, 12));
+        painelFundo.setLayout(null);
+        painelFundo.add(barraRolagem);
+        painelFundo.add(labelMatricula);
+        painelFundo.add(labelNome);
+        
+ 
+        getContentPane().add(painelFundo);
+        
+        textNome = new JTextField();
+        textNome.setBounds(369, 44, 282, 28);
+        painelFundo.add(textNome);
+        textNome.setColumns(10);
+        
+        JLabel labelTitulo = new JLabel("CRUD ALUNO");
+        labelTitulo.setBounds(6, 6, 645, 16);
+        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        labelTitulo.setFont(new Font("SansSerif", Font.BOLD, 17));
+        painelFundo.add(labelTitulo);
+        
+        textMatricula = new JTextField();
+        textMatricula.setBounds(74, 44, 216, 28);
+        painelFundo.add(textMatricula);
+        textMatricula.setColumns(10);
+        
+        JButton btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.setBounds(6, 104, 112, 36);
+        btnCadastrar.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btnCadastrar.setForeground(new Color(255, 255, 255));
+        btnCadastrar.setBackground(new Color(46, 139, 87));
+        btnCadastrar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {						
+					aluno.setNome(textNome.getText());
+					aluno.setMatricula(textMatricula.getText());
 					controller.create(aluno);
-					JOptionPane.showMessageDialog(panel, "Aluno inserido com sucesso!");
-				}
-				
+					JOptionPane.showMessageDialog(painelFundo, "Aluno inserido com sucesso!");
+				}				
 				 catch (Exception e1) {
-					
 					JOptionPane.showMessageDialog(null, "Erro ao Inserir Aluno!");
-				}
-			}
-		});
-		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnNewButton.setBounds(10, 140, 109, 35);
-		panel.add(btnNewButton);
-		
-		JLabel lblNewLabel_3 = new JLabel("Opera\u00E7\u00F5es do Crud ");
-		lblNewLabel_3.setFont(new Font("Verdana", Font.BOLD, 16));
-		lblNewLabel_3.setBounds(202, 87, 201, 38);
-		panel.add(lblNewLabel_3);
-		
-		JButton btnUpdate = new JButton("UPDATE");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				try {								
-					
-					aluno.setNome(textField.getText());
-					aluno.setMatriula(textField_1.getText());
-					
-					controller.updateAluno(aluno);
-					
-					JOptionPane.showMessageDialog(null, "Aluno atualizado!");
-				}
-				catch(Exception e1) {
-					
-					System.out.println("Erro ao atualizar aluno");
-				}
-			}
-		});
-		btnUpdate.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnUpdate.setBounds(150, 140, 109, 35);
-		panel.add(btnUpdate);
-		
-		JButton btnDelete = new JButton("DELETE");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				try {
-					
-					aluno.setMatriula(textField_1.getText());					
-					controller.delete(aluno);					
-				}
-				
-				catch(Exception e1) {
-					
-					JOptionPane.showMessageDialog(null, "Aluno Deletado com sucesso!");
-				}
-			}
-		});
-		btnDelete.setBackground(new Color(255, 0, 0));
-		btnDelete.setForeground(new Color(192, 192, 192));
-		btnDelete.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnDelete.setBounds(294, 140, 109, 35);
-		panel.add(btnDelete);
-		
-		JButton button_2 = new JButton("LIST");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//...		
-			}
-		});
-		button_2.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		button_2.setBounds(443, 140, 109, 35);
-		panel.add(button_2);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 187, 546, 191);
-		panel.add(panel_1);
-	}
+				}	
+        	}
+        });
+        painelFundo.add(btnCadastrar);
+        
+        JButton btnAtualizar = new JButton("Atualizar");
+        btnAtualizar.setBounds(6, 156, 112, 36);
+        btnAtualizar.setForeground(Color.WHITE);
+        btnAtualizar.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btnAtualizar.setBackground(new Color(255, 165, 0));
+        btnAtualizar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {						
+        			aluno.setNome(textNome.getText());
+					aluno.setMatricula(textMatricula.getText());
+					controller.update(aluno);
+					JOptionPane.showMessageDialog(painelFundo, "Aluno atualizado!");
+				}				
+				 catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao atualizar aluno!");
+				}	
+        	}
+        });
+        painelFundo.add(btnAtualizar);
+        
+        JButton btnDeletar = new JButton("Deletar");
+        btnDeletar.setBounds(6, 213, 112, 36);
+        btnDeletar.setForeground(Color.WHITE);
+        btnDeletar.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btnDeletar.setBackground(new Color(255, 0, 0));
+        btnDeletar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {						
+        			aluno.setMatricula(textMatricula.getText());					
+					controller.delete(aluno);	
+					JOptionPane.showMessageDialog(painelFundo, "Aluno deletado com sucesso!");
+				}				
+				 catch (Exception e1) {
+					 JOptionPane.showMessageDialog(null, "Erro ao deletar aluno!");
+				}	
+        	}
+        });
+        painelFundo.add(btnDeletar);
+        
+        btnListarTodos = new JButton("Listar");
+        btnListarTodos.setForeground(Color.WHITE);
+        btnListarTodos.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btnListarTodos.setBackground(new Color(30, 144, 255));
+        btnListarTodos.setBounds(6, 273, 112, 36);
+        btnListarTodos.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		pesquisar(modelo);			
+        	}
+        });
+        painelFundo.add(btnListarTodos);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(673, 374);
+        setVisible(true);
+        
+        
+    }
+ 
+    private void criaJTable() {
+        tabela = new JTable(modelo);
+        modelo.addColumn("Matricula");
+        modelo.addColumn("Nome");
+        tabela.getColumnModel().getColumn(0)
+        .setPreferredWidth(10);
+        tabela.getColumnModel().getColumn(1)
+        .setPreferredWidth(120);
+        pesquisar(modelo);
+    }
+    
+    public static void pesquisar(DefaultTableModel modelo) {
+        modelo.setNumRows(0);
+        AlunoController controller = new AlunoController();
+        for (Aluno alunoList : controller.readAll()) {
+        	modelo.addRow(new Object[]{alunoList.getMatricula(),alunoList.getNome()});
+		}
+    }
+    
+    public static void cadastrar() {
+    	
+    }
+    
+    public static void main(String[] args) {
+        CrudAluno lc = new CrudAluno();
+        lc.setVisible(true);
+    }
 }
