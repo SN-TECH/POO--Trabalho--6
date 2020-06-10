@@ -176,6 +176,7 @@ public class CrudAluno extends JFrame {
     }
 	
     public static void main(String[] args) {
+	AplicaNimbusLookAndFeel.pegaNimbus();  
         CrudAluno lc = new CrudAluno();
         lc.setVisible(true);
     }
