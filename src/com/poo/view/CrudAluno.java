@@ -171,11 +171,7 @@ public class CrudAluno extends JFrame {
         	modelo.addRow(new Object[]{alunoList.getMatricula(),alunoList.getNome()});
 		}
     }
-    
-    public static void cadastrar() {
-    	
-    }
-    
+	
     public static void main(String[] args) {
         CrudAluno lc = new CrudAluno();
         lc.setVisible(true);
